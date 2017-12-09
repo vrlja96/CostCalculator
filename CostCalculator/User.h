@@ -22,3 +22,8 @@ void addNewUser(); //Adding new user in users.txt. Every PIN will be crypted and
 User* readAllRegisteredUsers(int *); //Reading all registered users from users.txt
 char *inputPin(); //Masking PIN with asterisks
 int isUsernameExisting(char *);  //Returns position in user.txt file if user with specified username already exists, or -1 if user doesnt exist
+void printAllUsers(); //Printing all existing users
+int removeUser(); //Removing user from users.txt (1 - successful, 0 - unsuccessful)
+int changeUserGroup(); // You can change users group from admin to analyst or from analyst to admin
+User* login(); //returning group of user if login is successful
+void printAllUsersInFile(User *, int); //Printing All Users in file
