@@ -223,3 +223,57 @@ void printAllUsers()
 	}
 	printf("=========================================================================================\n");
 }
+int changeUserGroup()
+{
+	int numberOfUsers;
+	User *users = readAllRegisteredUsers(&numberOfUsers);
+	char name[25] = { 0 }, surname[25] = { 0 }, group[15] = { 0 }, username[25] = { 0 };
+	printf("Enter Users Name: ");
+	scanf("%s", name);
+	printf("Enter Users Surname: ");
+	scanf("%s", surname);
+	printf("Enter Users Username: ");
+	scanf("%s", username);
+	int i = isUsernameExisting(username);
+	if (i >= 0 && !strcmp(users[i].name, name) && !strcmp(users[i].surname, surname))
+	{
+		printf("Enter new group for %s %s [Admin/Analyst]: ", name, surname);
+		scanf("%s", group);
+		if (!strcmp(group, "Admin") || !strcmp(group, "ADMIN") || !strcmp(group, "admin"))
+		{
+			if (users[i].userGroup == Admin)
+			{
+				printf("\nUser is already admin.");
+				return 0;
+			}
+			else
+			{
+				users[i].userGroup = Admin;
+				printf("\nUserGroup changed successfully");
+				printAllUsersInFile(users, numberOfUsers);
+				return 1;
+			}
+		}
+		else if (!strcmp(group, "Analyst") || !strcmp(group, "ANALYST") || !strcmp(group, "analyst"))
+		{
+			if (users[i].userGroup == Analyst)
+			{
+				printf("\nUser is already Analyst.");
+				return 0;
+			}
+			else
+			{
+				users[i].userGroup = Analyst;
+				printf("\nUserGroup changed successfully");
+				printAllUsersInFile(users, numberOfUsers);
+				return 1;
+			}
+		}
+		else
+		{
+			printf("Wrong UserGroup");
+			return 0;
+		}
+	}
+	return 0;
+}
