@@ -277,3 +277,27 @@ int changeUserGroup()
 	}
 	return 0;
 }
+
+User* login()
+{
+	int numberOfRegisteredUsers = 0;
+	unsigned pin;
+	char username[25];
+	User *allUsers = readAllRegisteredUsers(&numberOfRegisteredUsers);
+	printf("Login:\nUsername: ");
+	scanf("%s", username);
+	printf("PIN: ");
+	char *pins = inputPin();
+	pin = xcrc32(pins, 4, 16);
+	int position = isUsernameExisting(username);
+	if ((position >= 0) && allUsers[position].pin == pin)
+	{
+		printf("Login Successful.");
+		return &allUsers[position];
+	}
+	else
+	{
+		printf("Wrong username or PIN!");
+		return NULL;
+	}
+}
