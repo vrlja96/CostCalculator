@@ -112,9 +112,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="crc32.h" />
+    <ClInclude Include="Currency.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Currency.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="User.c" />
   </ItemGroup>
