@@ -30,3 +30,44 @@ Currency * readAllCurrencies(int * numOfCurrencies)
 	return currencies;
 }
 
+void addNewCurrency()
+{
+	int numberOfCurrencies;
+	Currency newCurrency, *currencies = readAllCurrencies(&numberOfCurrencies);
+	FILE *currencyFile = fopen("currency.txt", "a+");
+	if (!currencyFile)
+	{
+		printf("Error. Can not open \"currency.txt\" ");
+		return;
+	}
+	printf("Adding new Currency.\n Name (3 characters): ");
+	scanf("%s", newCurrency.currency);
+	for (int i = 0; i < numberOfCurrencies; ++i)
+	{
+		if (!strcmp(currencies[i].currency, newCurrency.currency))
+		{
+			printf("Currency Rate: ");
+			scanf("%lf", &newCurrency.currencyRate);
+			if (newCurrency.currencyRate == currencies[i].currencyRate)
+			{
+				printf("Error! Currency with same rate already exist.");
+				fclose(currencyFile);
+				return;
+			}
+			printf("Currency already exists. Updating currency rate.");
+			fclose(currencyFile);
+			updateCurrencyRate(&newCurrency);
+			return;
+		}
+	}
+	printf("Currency Rate: ");
+	scanf("%lf", &newCurrency.currencyRate);
+	fprintf(currencyFile, "%-4s %-5.2lf\n", newCurrency.currency, newCurrency.currencyRate);
+	fclose(currencyFile);
+}
+
+
+void updateCurrencyRate(Currency *currency)
+{
+
+}
