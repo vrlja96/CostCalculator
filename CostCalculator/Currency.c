@@ -69,5 +69,48 @@ void addNewCurrency()
 
 void updateCurrencyRate(Currency *currency)
 {
-
+	int numberOfCurrencies;
+	Currency *currencies = readAllCurrencies(&numberOfCurrencies), toUpdateCurrency;
+	if (currency)
+	{
+		for (int i = 0; i < numberOfCurrencies; ++i)
+		{
+			if (!strcmp(currencies[i].currency, currency->currency))
+			{
+				currencies[i].currencyRate = currency->currencyRate;
+				break;
+			}
+		}
+		printCurrenciesInFile(currencies, numberOfCurrencies);
+		return;
+	}
+	printf("Enter Currency you want to update: ");
+	scanf("%s", toUpdateCurrency.currency);
+	for (int i = 0; i < numberOfCurrencies; ++i)
+	{
+		if (!strcmp(toUpdateCurrency.currency, currencies[i].currency))
+		{
+			printf("Enter new Rate for %s", currencies[i].currency);
+			scanf("%lf", &toUpdateCurrency.currencyRate);
+			if (toUpdateCurrency.currencyRate == currencies[i].currencyRate)
+			{
+				printf("Error! Same Rate! Exiting");
+				return;
+			}
+			currencies[i].currencyRate = toUpdateCurrency.currencyRate;
+			printf("Updating successful");
+			printCurrenciesInFile(currencies, numberOfCurrencies);
+			return;
+		}
+	}
+	char answer;
+	getchar();
+	printf("%s does not exist. Do you want to add it[Y/N]", toUpdateCurrency.currency);
+	scanf("%c", &answer);
+	if (answer == 'Y' || answer == 'y')
+	{
+		addNewCurrency();
+		return;
+	}
+	return;
 }
