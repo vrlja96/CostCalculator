@@ -114,3 +114,46 @@ void updateCurrencyRate(Currency *currency)
 	}
 	return;
 }
+
+void printCurrenciesInFile(Currency *currencies, int numberOfCurrencies)
+{
+	FILE *file = fopen("currency.txt", "w");
+	if (!file)
+	{
+		printf("Error! Can not open currency file");
+		return;
+	}
+	for (int i = 0; i < numberOfCurrencies; ++i)
+	{
+		fprintf(file, "%-4s %-5.2lf\n", currencies[i].currency, currencies[i].currencyRate);
+	}
+	fclose(file);
+}
+
+
+int changeCurrency()
+{
+	int numberOfCurrencies;
+	char currency[10] = { 0 };
+	Currency *currencies = readAllCurrencies(&numberOfCurrencies);
+	printAllCurrencies();
+	printf("Input Currency Name (3 characters): ");
+	scanf("%s", &currency);
+	for (int i = 0; i < numberOfCurrencies; ++i)
+	{
+		if (!strcmp(currency, currencies[i].currency))
+		{
+			strcpy(currentCurrency.currency, currency);
+			currentCurrency.currencyRate = currencies[i].currencyRate;
+			return 1;
+		}
+	}
+	printf("No such Currency in currency list.");
+	return 0;
+}
+
+void setDefaultCurrency()
+{
+	strcpy(currentCurrency.currency, "BAM");
+	currentCurrency.currencyRate = 1.0;
+}
