@@ -157,3 +157,31 @@ void setDefaultCurrency()
 	strcpy(currentCurrency.currency, "BAM");
 	currentCurrency.currencyRate = 1.0;
 }
+
+int removeCurrency()
+{
+	char name[10] = { 0 };
+	int numberOfCurrencies;
+	printf("Enter Currency Name you want to remove: ");
+	scanf("%s", name);
+	if (!strcmp(name, "BAM"))
+	{
+		printf("You can not remove BAM. It is default currency.");
+		return 0;
+	}
+	Currency *currencies = readAllCurrencies(&numberOfCurrencies);
+	for (int i = 0; i < numberOfCurrencies; ++i)
+	{
+		if (!strcmp(currencies[i].currency, name))
+		{
+			for (int j = i; j < numberOfCurrencies - 1; ++j)
+			{
+				currencies[j] = currencies[j + 1];
+			}
+			printCurrenciesInFile(currencies, numberOfCurrencies - 1);
+			return 1;
+		}
+	}
+	printf("No such currency in file.");
+	return 0;
+}
