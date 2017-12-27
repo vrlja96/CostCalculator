@@ -128,6 +128,7 @@ int removeUser(User *loggedUser)
 		return 0;
 	}
 	printf("No such user.");
+	Sleep(3000);
 	return 0;
 }
 
@@ -255,12 +256,14 @@ int changeUserGroup()
 			if (users[i].userGroup == Admin)
 			{
 				printf("\nUser is already admin.");
+				Sleep(3000);
 				return 0;
 			}
 			else
 			{
 				users[i].userGroup = Admin;
 				printf("\nUserGroup changed successfully");
+				Sleep(3000);
 				printAllUsersInFile(users, numberOfUsers);
 				return 1;
 			}
@@ -270,6 +273,7 @@ int changeUserGroup()
 			if (users[i].userGroup == Analyst)
 			{
 				printf("\nUser is already Analyst.");
+				Sleep(3000);
 				return 0;
 			}
 			else
@@ -277,12 +281,14 @@ int changeUserGroup()
 				users[i].userGroup = Analyst;
 				printf("\nUserGroup changed successfully");
 				printAllUsersInFile(users, numberOfUsers);
+				Sleep(3000);
 				return 1;
 			}
 		}
 		else
 		{
 			printf("Wrong UserGroup");
+			Sleep(3000);
 			return 0;
 		}
 	}
@@ -304,11 +310,13 @@ User* login()
 	if ((position >= 0) && allUsers[position].pin == pin)
 	{
 		printf("Login Successful.");
+		Sleep(2000);
 		return &allUsers[position];
 	}
 	else
 	{
 		printf("Wrong username or PIN!");
+		Sleep(3000);
 		return NULL;
 	}
 }
