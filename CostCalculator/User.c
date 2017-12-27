@@ -160,7 +160,12 @@ User * readAllRegisteredUsers(int *numberOfAllUsers)
 		fclose(users);
 		return allUsers;
 	}
-	else printf("Error while opening users.txt");
+	else
+	{
+		printf("Error while opening users.txt");
+		Sleep(3000);
+		exit(-1);
+	}
 	return NULL;
 }
 

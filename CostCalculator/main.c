@@ -30,6 +30,7 @@ int main()
 		if (!adminlog)
 		{
 			printf("Unexpected Error");
+			Sleep(3000);
 			exit(-1);
 		}
 		time(&rawtime);
@@ -133,6 +134,7 @@ int main()
 		if (!analystlog)
 		{
 			printf("Unexpected Error");
+			Sleep(3000);
 			exit(-1);
 		}
 		time(&rawtime);

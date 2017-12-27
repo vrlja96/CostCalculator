@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <Windows.h>
 #include <ctype.h>
 #include "crc32.h" //Adding Crypto algorithm 
 
