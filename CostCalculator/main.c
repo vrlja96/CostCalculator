@@ -3,7 +3,6 @@
 #include <Windows.h>
 #include "User.h"
 #include "Currency.h"
-#include "Bill.h"
 
 User *currentUser;
 
@@ -39,7 +38,7 @@ int main()
 
 		while (1)
 		{
-			printf("Choose one of options:\n\n");
+			printf("\nChoose one of options:\n\n");
 			printf("[1] Add New User\n[2] Remosve User\n[3] Change Users Group\n[4] Print All Users\n[5] Add New Currency\n[6] Remove Currency\n[7] Change Currency\n[8] Update Currency's rate\n[9] Print All Currencies\n[10] Logout\n[0] Close Application\n");
 			scanf("%d", &option);
 			switch (option)

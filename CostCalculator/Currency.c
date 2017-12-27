@@ -185,3 +185,14 @@ int removeCurrency()
 	printf("No such currency in file.");
 	return 0;
 }
+
+void printAllCurrencies()
+{
+	int numberOfCurrencies;
+	Currency *currencies = readAllCurrencies(&numberOfCurrencies);
+	printf("Avalivable Currencies (%d):\n", numberOfCurrencies);
+	for (int i = 0; i < numberOfCurrencies; ++i)
+	{
+		printf("%-3s %5.2lf\n", currencies[i].currency, currencies[i].currencyRate);
+	}
+}
