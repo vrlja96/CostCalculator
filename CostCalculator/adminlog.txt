@@ -5,3 +5,5 @@ vrlja Add New Currency 27.12.2017. - 14:17:17
 vrlja Logout 27.12.2017. - 14:17:21
 vrlja Login 27.12.2017. - 15:00:53
 vrlja Login 27.12.2017. - 15:01:11
+vrlja Login 27.12.2017. - 22:37:21
+vrlja Remove User 27.12.2017. - 22:37:33

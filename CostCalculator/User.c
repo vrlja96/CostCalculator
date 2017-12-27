@@ -93,7 +93,7 @@ char* inputPin()
 	return pin;
 }
 
-int removeUser()
+int removeUser(User *loggedUser)
 {
 	int numberOfRegisteredUsers = 0;
 	User *users = readAllRegisteredUsers(&numberOfRegisteredUsers), toDeleteUser;
@@ -105,6 +105,12 @@ int removeUser()
 	scanf("%s", toDeleteUser.surname);
 	printf("Username: ");
 	scanf("%s", toDeleteUser.username);
+	if (!strcmp(loggedUser->username, toDeleteUser.username))
+	{
+		printf("You can not remove yourself!");
+		Sleep(3000);
+		return 0;
+	}
 	int i = isUsernameExisting(toDeleteUser.username);
 	if (i >= 0 && !strcmp(users[i].name, toDeleteUser.name) && !strcmp(users[i].surname, toDeleteUser.surname))
 	{

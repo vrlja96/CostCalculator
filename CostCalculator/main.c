@@ -52,7 +52,7 @@ int main()
 				system("cls");
 				break;
 			case 2:
-				removeUser();
+				removeUser(currentUser);
 				time(&rawtime);
 				timeinfo = localtime(&rawtime);
 				fprintf(adminlog, "%s Remove User %02d.%02d.%02d. - %02d:%02d:%02d\n", currentUser->username, timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
