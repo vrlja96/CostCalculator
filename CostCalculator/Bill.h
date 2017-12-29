@@ -41,3 +41,4 @@ Product readProduct(char *); //Reading product from a line in file, whole line i
 Product readProductFormat_5(char *); //Reading product from a line in file, if bill is .csv
 int validateBill(Bill, char *); //Return 1 if bill is valid or 0 if bill is not valid
 Bill *loadBills(int *); //Loads all bills into system
+void archiveBill(char *); //Move bill in archive after loading

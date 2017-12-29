@@ -679,7 +679,17 @@ Bill* loadBills(int *numberOfValidBills)
 			}
 		}
 		fclose(file);
+		archiveBill(path);
 	}
 	*numberOfValidBills = j;
 	return bills;
+}
+
+void archiveBill(char *path)
+{
+	char newPath[256] = { 0 };
+	strcpy(newPath, "Archive\\\\");
+	strcat(newPath, path);
+	removeSubString(newPath, "Bills\\\\");
+	rename(path, newPath);
 }
