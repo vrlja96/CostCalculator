@@ -618,28 +618,48 @@ Bill* loadBills(int *numberOfValidBills)
 			fseek(file, 0, SEEK_SET);
 			if (format == Format1)
 			{
-				bills[j] = readFormat_1_Bill(file);
-				++j;
+				Bill bill = readFormat_1_Bill(file);
+				if (validateBill(bill, path))
+				{
+					bills[j] = bill;
+					++j;
+				}
 			}
 			else if (format == Format2)
 			{
-				bills[j] = readFormat_2_Bill(file);
-				++j;
+				Bill bill = readFormat_2_Bill(file);
+				if (validateBill(bill, path))
+				{
+					bills[j] = bill;
+					++j;
+				}
 			}
 			else if (format == Format3)
 			{
-				bills[j] = readFormat_3_Bill(file);
-				++j;
+				Bill bill = readFormat_3_Bill(file);
+				if (validateBill(bill, path))
+				{
+					bills[j] = bill;
+					++j;
+				}
 			}
 			else if (format == Format4)
 			{
-				bills[j] = readFormat_4_Bill(file);
-				++j;
+				Bill bill = readFormat_4_Bill(file);
+				if (validateBill(bill, path))
+				{
+					bills[j] = bill;
+					++j;
+				}
 			}
 			else if (format == Format5)
 			{
-				bills[j] = readFormat_5_Bill(file, path);
-				++j;
+				Bill bill = readFormat_5_Bill(file, path);
+				if (validateBill(bill, path))
+				{
+					bills[j] = bill;
+					++j;
+				}
 			}
 			else
 			{
