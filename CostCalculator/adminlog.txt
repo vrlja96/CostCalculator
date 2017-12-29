@@ -8,3 +8,18 @@ vrlja Login 27.12.2017. - 15:01:11
 vrlja Login 27.12.2017. - 22:37:21
 vrlja Remove User 27.12.2017. - 22:37:33
 vrlja Login 27.12.2017. - 22:43:53
+vrlja Login 28.12.2017. - 12:14:34
+vrlja Print All Users 28.12.2017. - 12:14:38
+vrlja Add New User 28.12.2017. - 12:14:52
+vrlja Logout 28.12.2017. - 12:14:54
+vrlja Login 28.12.2017. - 12:16:22
+vrlja Remove User 28.12.2017. - 12:16:37
+vrlja Add New User 28.12.2017. - 12:16:47
+vrlja Add New User 28.12.2017. - 12:16:58
+vrlja Add New User 28.12.2017. - 12:17:10
+vrlja Print All Users 28.12.2017. - 12:17:13
+vrlja Print All Currencies 28.12.2017. - 12:17:23
+vrlja Print All Currencies 28.12.2017. - 12:19:22
+vrlja Add New Currency 28.12.2017. - 12:19:35
+vrlja Print All Currencies 28.12.2017. - 12:19:36
+vrlja Logout 28.12.2017. - 12:19:45

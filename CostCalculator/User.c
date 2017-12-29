@@ -235,7 +235,7 @@ void printAllUsers()
 	}
 	printf("=========================================================================================\n");
 }
-int changeUserGroup()
+User* changeUserGroup()
 {
 	int numberOfUsers;
 	User *users = readAllRegisteredUsers(&numberOfUsers);
@@ -257,7 +257,7 @@ int changeUserGroup()
 			{
 				printf("\nUser is already admin.");
 				Sleep(3000);
-				return 0;
+				return NULL;
 			}
 			else
 			{
@@ -265,7 +265,7 @@ int changeUserGroup()
 				printf("\nUserGroup changed successfully");
 				Sleep(3000);
 				printAllUsersInFile(users, numberOfUsers);
-				return 1;
+				return &users[i];
 			}
 		}
 		else if (!strcmp(group, "Analyst") || !strcmp(group, "ANALYST") || !strcmp(group, "analyst"))
@@ -274,7 +274,7 @@ int changeUserGroup()
 			{
 				printf("\nUser is already Analyst.");
 				Sleep(3000);
-				return 0;
+				return NULL;
 			}
 			else
 			{
@@ -282,14 +282,14 @@ int changeUserGroup()
 				printf("\nUserGroup changed successfully");
 				printAllUsersInFile(users, numberOfUsers);
 				Sleep(3000);
-				return 1;
+				return &users[i];
 			}
 		}
 		else
 		{
 			printf("Wrong UserGroup");
 			Sleep(3000);
-			return 0;
+			return NULL;
 		}
 	}
 	return 0;

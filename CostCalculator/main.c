@@ -3,11 +3,25 @@
 #include <Windows.h>
 #include "User.h"
 #include "Currency.h"
+#include "Bill.h"
 
 User *currentUser;
 
 int main()
 {
+	int numberOfBills;
+	Bill *bills = loadBills(&numberOfBills);
+	for (int i = 0; i < numberOfBills; ++i)
+	{
+		printf("Date: %s\nBuyer Name: %s\nNumber of Products: %d\n", bills[i].date, bills[i].buyerName, bills[i].numblerOfProducts);
+		printf("Total: %.2lf\nPDV: %.2lf\nTotal Price: %.2lf\n", bills[i].total, bills[i].PDV, bills[i].totalPrice);
+		printf("Products:\n------------------------------------------\n");
+		for (int j = 0; j < bills[i].numblerOfProducts; ++j)
+			printf("%s %s %.2lf %.2lf %.2lf\n", bills[i].products[j].productCode, bills[i].products[j].productName, bills[i].products[j].quantity, bills[i].products[j].singleProductPrice, bills[i].products[j].totalProductPrice);
+		printf("------------------------------------------\n");
+	}
+	return 0;
+	/*
 	int option;
 	time_t rawtime;
 	struct tm *timeinfo;
@@ -59,12 +73,21 @@ int main()
 				system("cls");
 				break;
 			case 3:
-				changeUserGroup();
+			{
+				User *changedUser = changeUserGroup();
+				if (!strcmp(currentUser->username, changedUser->username))
+				{
+					currentUser = NULL;
+					printf("\nLogin to continue\n");
+					Sleep(2000);
+					main();
+				}
 				time(&rawtime);
 				timeinfo = localtime(&rawtime);
 				fprintf(adminlog, "%s Change User Group %02d.%02d.%02d. - %02d:%02d:%02d\n", currentUser->username, timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 				system("cls");
 				break;
+			}
 			case 4:
 				system("cls");
 				time(&rawtime);
@@ -114,6 +137,7 @@ int main()
 				timeinfo = localtime(&rawtime);
 				fprintf(adminlog, "%s Logout %02d.%02d.%02d. - %02d:%02d:%02d\n", currentUser->username, timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 				fclose(adminlog);
+				currentUser = NULL;
 				main();
 				break;
 			default:
@@ -134,7 +158,7 @@ int main()
 		if (!analystlog)
 		{
 			printf("Unexpected Error");
-			Sleep(3000);
+			Sleep(2000);
 			exit(-1);
 		}
 		time(&rawtime);
@@ -142,5 +166,5 @@ int main()
 		fprintf(analystlog, "%s Login %02d.%02d.%02d. - %02d:%02d:%02d\n", currentUser->username, timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 		fclose(analystlog);
 		main();
-	}
+	}*/
 }

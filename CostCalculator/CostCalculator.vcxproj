@@ -111,11 +111,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bill.h" />
     <ClInclude Include="crc32.h" />
     <ClInclude Include="Currency.h" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bill.c" />
     <ClCompile Include="Currency.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="User.c" />

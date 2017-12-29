@@ -1,2 +1,5 @@
 Nemanja                   Vrljanovic                vrlja                     d5cc77c1        Admin
-Nikola                    Nikolic                   nidzo                     491c1223        Analyst
+Bojan                     Petrusic                  bokz                      3a594f9         Analyst
+Zeljko                    Lojic                     lojs                      470201f5        Analyst
+Ognjen                    Djukic                    djukz                     ed83ca7c        Admin
+Vojin                     Djukic                    vokz                      952cdbc6        Analyst

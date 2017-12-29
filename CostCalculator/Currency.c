@@ -51,10 +51,12 @@ void addNewCurrency()
 			if (newCurrency.currencyRate == currencies[i].currencyRate)
 			{
 				printf("Error! Currency with same rate already exist.");
+				Sleep(2000);
 				fclose(currencyFile);
 				return;
 			}
 			printf("Currency already exists. Updating currency rate.");
+			Sleep(2000);
 			fclose(currencyFile);
 			updateCurrencyRate(&newCurrency);
 			return;
@@ -95,11 +97,13 @@ void updateCurrencyRate(Currency *currency)
 			if (toUpdateCurrency.currencyRate == currencies[i].currencyRate)
 			{
 				printf("Error! Same Rate! Exiting");
+				Sleep(2000);
 				return;
 			}
 			currencies[i].currencyRate = toUpdateCurrency.currencyRate;
 			printf("Updating successful");
 			printCurrenciesInFile(currencies, numberOfCurrencies);
+			Sleep(2000);
 			return;
 		}
 	}
@@ -121,6 +125,7 @@ void printCurrenciesInFile(Currency *currencies, int numberOfCurrencies)
 	if (!file)
 	{
 		printf("Error! Can not open currency file");
+		Sleep(2000);
 		return;
 	}
 	for (int i = 0; i < numberOfCurrencies; ++i)
@@ -149,6 +154,7 @@ int changeCurrency()
 		}
 	}
 	printf("No such Currency in currency list.");
+	Sleep(2000);
 	return 0;
 }
 

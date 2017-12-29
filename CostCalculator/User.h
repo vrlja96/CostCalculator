@@ -25,6 +25,6 @@ char *inputPin(); //Masking PIN with asterisks
 int isUsernameExisting(char *);  //Returns position in user.txt file if user with specified username already exists, or -1 if user doesnt exist
 void printAllUsers(); //Printing all existing users
 int removeUser(User *); //Removing user from users.txt (1 - successful, 0 - unsuccessful), Parameter is current User. You can not remove current logged user
-int changeUserGroup(); // You can change users group from admin to analyst or from analyst to admin
+User* changeUserGroup(); // You can change users group from admin to analyst or from analyst to admin. Function returns user whose group is changed
 User* login(); //returning group of user if login is successful
 void printAllUsersInFile(User *, int); //Printing All Users in file

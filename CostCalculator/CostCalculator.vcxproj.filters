@@ -24,6 +24,12 @@
     <ClInclude Include="Currency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Bill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="User.c">
@@ -33,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Currency.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bill.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
