@@ -26,6 +26,12 @@ typedef struct _Bill
 	double total, PDV, totalPrice;
 }Bill;
 
+typedef struct _node
+{
+	Bill bill;
+	struct _node *next, *prev;
+}Node;
+
 int isDateLegitimate(char *); //Check if date is legitimate(returns 1 if true, 0 if false)
 Format checkBillFormat(FILE *, char *); //Bill Format Check
 char **readAllBills(int *); //Return names of all files in directory Bills and number of bills
@@ -42,3 +48,6 @@ Product readProductFormat_5(char *); //Reading product from a line in file, if b
 int validateBill(Bill, char *); //Return 1 if bill is valid or 0 if bill is not valid
 Bill *loadBills(int *); //Loads all bills into system
 void archiveBill(char *); //Move bill in archive after loading
+
+void add(Node **, Node**, Bill); //Add bill in list
+void clearList(Node **, Node **); //Clear list

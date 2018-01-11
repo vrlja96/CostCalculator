@@ -693,3 +693,30 @@ void archiveBill(char *path)
 	removeSubString(newPath, "Bills\\\\");
 	rename(path, newPath);
 }
+
+void add(Node **head, Node **tail, Bill bill)
+{
+	Node *node = (Node *)calloc(1, sizeof(Node));
+	node->bill = bill;
+	node->next = NULL;
+	if (*head == NULL) //If List is empty add et the biginning
+	{
+		*head = *tail = node;
+		node->prev = 0;
+		return;
+	}
+	(*tail)->next = node;
+	node->prev = *tail;
+	*tail = node;
+}
+
+void clearList(Node **head, Node **tail)
+{
+	while (*head)
+	{
+		Node *temp = (*head)->next;
+		free(*head);
+		*head = temp;
+	}
+	*tail = NULL;
+}
