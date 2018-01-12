@@ -35,6 +35,7 @@ typedef struct _node
 int isDateLegitimate(char *); //Check if date is legitimate(returns 1 if true, 0 if false)
 Format checkBillFormat(FILE *, char *); //Bill Format Check
 char **readAllBills(int *); //Return names of all files in directory Bills and number of bills
+char **readArchive(int *); //Reading Archive folder for restoring data
 void removeSubString(char *, char *); //Remove second string from first one
 
 Bill readFormat_1_Bill(FILE *); //Reading Format1 Bill
@@ -46,7 +47,7 @@ Bill readFormat_5_Bill(FILE *, char *); //Reading Format5 Bill
 Product readProduct(char *); //Reading product from a line in file, whole line is parameter
 Product readProductFormat_5(char *); //Reading product from a line in file, if bill is .csv
 int validateBill(Bill, char *); //Return 1 if bill is valid or 0 if bill is not valid
-Bill *loadBills(int *); //Loads all bills into system
+int loadBills(Node **, Node **); //Loads all bills into system
 void archiveBill(char *); //Move bill in archive after loading
 
 void add(Node **, Node**, Bill); //Add bill in list

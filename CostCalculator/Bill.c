@@ -40,16 +40,49 @@ char ** readAllBills(int *numberOfFilesInDirectory)
 	}
 	while (file = readdir(directory))
 	{
-		if (strcmp(file->d_name, ".") && strcmp(file->d_name, ".."))
+		if (strcmp(file->d_name, ".") && strcmp(file->d_name, "..")) //Dont read "." & ".." which are not bills
 		{
 			files[numberOfFiles] = (char*)calloc(file->d_namlen + 1, sizeof(char));
-			strcpy(files[numberOfFiles++], file->d_name);
+			strcpy(files[numberOfFiles], "Bills\\\\");
+			strcat(files[numberOfFiles], file->d_name);
+			++numberOfFiles;
 			if (numberOfFiles == maxCapacity)
 				files = (char **)realloc(files, sizeof(char *) * (maxCapacity *= 2));
 		}
 	}
 	files = (char **)realloc(files, sizeof(char *) * numberOfFiles);
 	*numberOfFilesInDirectory = numberOfFiles;
+	return files;
+}
+
+char ** readArchive(int *numberOfBills)
+{
+	DIR *directory;
+	struct dirent *file;
+	int maxCapacity = 2;
+	char **files = (char **)calloc(maxCapacity, sizeof(char *));
+	int numberOfFiles = 0;
+
+	directory = opendir("Archive");
+	if (!directory)
+	{
+		*numberOfBills = numberOfFiles;
+		printf("Can not restore old data. Checking if there is new bills.");
+		return NULL;
+	}
+	while (file = readdir(directory))
+	{
+		if (strcmp(file->d_name, ".") && strcmp(file->d_name, "..")) //Dont read "." & ".." which are not bills
+		{
+			files[numberOfFiles] = (char*)calloc(file->d_namlen + 1, sizeof(char));
+			strcpy(files[numberOfFiles], "Archive\\\\");
+			strcat(files[numberOfFiles], file->d_name);
+			++numberOfFiles;
+			if (numberOfFiles == maxCapacity)
+				files = (char **)realloc(files, sizeof(char *) * (maxCapacity *= 2));
+		}
+	}
+	*numberOfBills = numberOfFiles;
 	return files;
 }
 
@@ -409,6 +442,7 @@ Bill readFormat_5_Bill(FILE *file, char *path)
 	char *info = (char *)calloc(1024, sizeof(char));
 	strcpy(filename, path);
 	removeSubString(filename, "Bills\\\\");
+	removeSubString(filename, "Archive\\\\");
 	removeSubString(filename, ".csv");
 	for (int i = 0; filename[i] != '#'; ++i)
 		buyerName[i] = filename[i];
@@ -560,6 +594,7 @@ int validateBill(Bill bill, char *path)
 	strcpy(filename, path);
 	char errorFilename[256] = { 0 };
 	removeSubString(filename, "Bills\\\\");
+	removeSubString(filename, "Archive\\\\");
 	strcpy(errorFilename, "ErrorLog\\\\");
 	strcat(errorFilename, filename);
 	removeSubString(errorFilename, ".txt");
@@ -601,16 +636,17 @@ int validateBill(Bill bill, char *path)
 	}
 }
 
-Bill* loadBills(int *numberOfValidBills)
+int loadBills(Node **head, Node **tail)
 {
-	int numberOfBills = 0, j = 0; //j - iterator
+	int numberOfBills = 0, numberOfArchivedBills = 0;
 	char **files = readAllBills(&numberOfBills);
-	Bill *bills = (Bill *)calloc(numberOfBills, sizeof(Bill));
-	for (int i = 0; i < numberOfBills; ++i)
+	char **archive = readArchive(&numberOfArchivedBills);
+
+	//Restore old Data
+	for (int i = 0; i < numberOfArchivedBills; ++i)
 	{
 		char path[256] = { 0 };
-		strcpy(path, "Bills\\\\");
-		strcat(path, files[i]);
+		strcpy(path, archive[i]);
 		FILE *file = fopen(path, "r");
 		if (file)
 		{
@@ -620,46 +656,75 @@ Bill* loadBills(int *numberOfValidBills)
 			{
 				Bill bill = readFormat_1_Bill(file);
 				if (validateBill(bill, path))
-				{
-					bills[j] = bill;
-					++j;
-				}
+					add(head, tail, bill);
 			}
 			else if (format == Format2)
 			{
 				Bill bill = readFormat_2_Bill(file);
 				if (validateBill(bill, path))
-				{
-					bills[j] = bill;
-					++j;
-				}
+					add(head, tail, bill);
 			}
 			else if (format == Format3)
 			{
 				Bill bill = readFormat_3_Bill(file);
 				if (validateBill(bill, path))
-				{
-					bills[j] = bill;
-					++j;
-				}
+					add(head, tail, bill);
 			}
 			else if (format == Format4)
 			{
 				Bill bill = readFormat_4_Bill(file);
 				if (validateBill(bill, path))
-				{
-					bills[j] = bill;
-					++j;
-				}
+					add(head, tail, bill);
 			}
 			else if (format == Format5)
 			{
 				Bill bill = readFormat_5_Bill(file, path);
 				if (validateBill(bill, path))
-				{
-					bills[j] = bill;
-					++j;
-				}
+					add(head, tail, bill);
+			}
+		}
+		fclose(file);
+	}
+
+	//Read New Bills
+	for (int i = 0; i < numberOfBills; ++i)
+	{
+		char path[256] = { 0 };
+		strcpy(path, files[i]);
+		FILE *file = fopen(path, "r");
+		if (file)
+		{
+			Format format = checkBillFormat(file, path);
+			fseek(file, 0, SEEK_SET);
+			if (format == Format1)
+			{
+				Bill bill = readFormat_1_Bill(file);
+				if (validateBill(bill, path))
+					add(head, tail, bill);
+			}
+			else if (format == Format2)
+			{
+				Bill bill = readFormat_2_Bill(file);
+				if (validateBill(bill, path))
+					add(head, tail, bill);
+			}
+			else if (format == Format3)
+			{
+				Bill bill = readFormat_3_Bill(file);
+				if (validateBill(bill, path))
+					add(head, tail, bill);
+			}
+			else if (format == Format4)
+			{
+				Bill bill = readFormat_4_Bill(file);
+				if (validateBill(bill, path))
+					add(head, tail, bill);
+			}
+			else if (format == Format5)
+			{
+				Bill bill = readFormat_5_Bill(file, path);
+				if (validateBill(bill, path))
+					add(head, tail, bill);
 			}
 			else
 			{
@@ -681,8 +746,6 @@ Bill* loadBills(int *numberOfValidBills)
 		fclose(file);
 		archiveBill(path);
 	}
-	*numberOfValidBills = j;
-	return bills;
 }
 
 void archiveBill(char *path)

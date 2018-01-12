@@ -9,19 +9,12 @@ User *currentUser;
 
 int main()
 {
-	/*int numberOfBills;
-	Bill *bills = loadBills(&numberOfBills);
-	for (int i = 0; i < numberOfBills; ++i)
-	{
-		printf("Date: %s\nBuyer Name: %s\nNumber of Products: %d\n", bills[i].date, bills[i].buyerName, bills[i].numblerOfProducts);
-		printf("Total: %.2lf\nPDV: %.2lf\nTotal Price: %.2lf\n", bills[i].total, bills[i].PDV, bills[i].totalPrice);
-		printf("Products:\n------------------------------------------\n");
-		for (int j = 0; j < bills[i].numblerOfProducts; ++j)
-			printf("%s %s %.2lf %.2lf %.2lf\n", bills[i].products[j].productCode, bills[i].products[j].productName, bills[i].products[j].quantity, bills[i].products[j].singleProductPrice, bills[i].products[j].totalProductPrice);
-		printf("------------------------------------------\n");
-	}
-	return 0;*/
-	
+	Node *head = NULL, *tail = NULL;
+	loadBills(&head, &tail);
+	for (Node *tmp = head; tmp; tmp = tmp->next)
+		printf("%s\n", tmp->bill.buyerName);
+	return 0;
+	/*
 	int option;
 	time_t rawtime;
 	struct tm *timeinfo;
@@ -166,5 +159,5 @@ int main()
 		fprintf(analystlog, "%s Login %02d.%02d.%02d. - %02d:%02d:%02d\n", currentUser->username, timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 		fclose(analystlog);
 		main();
-	}
+	}*/
 }
