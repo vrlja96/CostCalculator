@@ -454,6 +454,12 @@ Bill readFormat_5_Bill(FILE *file, char *path)
 		date[i] = date[i + 1];
 	date[i - 1] = 0;
 
+	for (i = 0; i < strlen(date); ++i)
+	{
+		if (date[i] == '.')
+			date[i] = '/';
+	}
+
 	strcpy(bill.date, date);
 
 	fgets(info, 1024, file);
@@ -590,6 +596,7 @@ Product readProductFormat_5(char *productLine)
 
 int validateBill(Bill bill, char *path)
 {
+	double totalPrice = 0;
 	char filename[256] = { 0 };
 	strcpy(filename, path);
 	char errorFilename[256] = { 0 };
@@ -610,16 +617,6 @@ int validateBill(Bill bill, char *path)
 			return 0;
 		}
 	}
-	if (bill.totalPrice != bill.PDV + bill.total) //Check Bill Price
-	{
-		FILE *errorFile = fopen(errorFilename, "w");
-		if (errorFile)
-		{
-			fprintf(errorFile, "The prices are not correct");
-			fclose(errorFile);
-			return 0;
-		}
-	}
 	for (int i = 0; i < bill.numblerOfProducts; ++i) //Check each product
 	{
 		if (bill.products[i].totalProductPrice != bill.products[i].quantity * bill.products[i].singleProductPrice)
@@ -632,8 +629,20 @@ int validateBill(Bill bill, char *path)
 				return 0;
 			}
 		}
-		return 1;
+		else
+			totalPrice += bill.products[i].totalProductPrice;
 	}
+	if ((bill.totalPrice != bill.PDV + bill.total) || totalPrice != bill.total) //Check Bill Price
+	{
+		FILE *errorFile = fopen(errorFilename, "w");
+		if (errorFile)
+		{
+			fprintf(errorFile, "The prices are not correct");
+			fclose(errorFile);
+			return 0;
+		}
+	}
+	return 1;
 }
 
 int loadBills(Node **head, Node **tail)

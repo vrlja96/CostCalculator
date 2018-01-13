@@ -12,7 +12,7 @@ int main()
 	Node *head = NULL, *tail = NULL;
 	loadBills(&head, &tail);
 	for (Node *tmp = head; tmp; tmp = tmp->next)
-		printf("%s\n", tmp->bill.buyerName);
+		printf("%s -- %d\n", tmp->bill.date, isDateLegitimate(tmp->bill.date));
 	return 0;
 	/*
 	int option;
