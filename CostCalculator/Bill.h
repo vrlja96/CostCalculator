@@ -52,3 +52,5 @@ void archiveBill(char *); //Move bill in archive after loading
 
 void add(Node **, Node**, Bill); //Add bill in list
 void clearList(Node **, Node **); //Clear list
+
+void exportDataForMonth(Node *, Node *, Currency); //Export data for specified month

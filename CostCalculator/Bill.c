@@ -792,3 +792,55 @@ void clearList(Node **head, Node **tail)
 	}
 	*tail = NULL;
 }
+
+void exportDataForMonth(Node *head, Node *tail, Currency currentCurrency)
+{
+	if (head == NULL)
+	{
+		printf("\nThere is no bills in system.\n");
+		Sleep(2000);
+		return;
+	}
+	char month[12] = { 0 };
+	do
+	{
+		printf("Enter month and year in format mm.yyyy: ");
+		scanf("%s", month);
+	} while (strlen(month) < 5);
+	printf("%s", month);
+	int numberOfBills = 0;
+	double total = 0;
+	char filename[128] = { 0 };
+	strcpy(filename, "ExportedData\\\\");
+	strcat(filename, month);
+	strcat(filename, ".txt");
+	for (int i = 0; i < strlen(month); ++i)
+	{
+		if (month[i] == '.')
+		{
+			month[i] = '/';
+			break;
+		}
+	}
+	FILE *file = fopen(filename, "w+");
+	if (!file)
+	{
+		printf("Couldn't open file for writing data.");
+		Sleep(2000);
+		return;
+	}
+	printf("Data is written in %s", filename);
+	for (Node *tmp = head; tmp; tmp = tmp->next)
+	{
+		if (strstr(tmp->bill.date, month))
+		{
+			printBillInFile(file, tmp->bill, currentCurrency);
+			++numberOfBills;
+			total += tmp->bill.totalPrice;
+		}
+	}
+	fprintf(file, "---------------------------\nNumber of Bills: %d\nTotal Price: %.3lf %s\n---------------------------\n", numberOfBills, total * currentCurrency.currencyRate, currentCurrency.currency);
+	fclose(file);
+	Sleep(2000);
+}
+
