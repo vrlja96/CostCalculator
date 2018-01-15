@@ -78,18 +78,12 @@ char* inputPin()
 	int pos = 0;
 	do {
 		c = _getch();
-
-		if (isprint(c) && c >= 0x30 && c <= 0x39)
-		{
+		if (isprint(c))
 			pin[pos++] = c;
-			printf("%c", '*');
-		}
 		else if (c == 8 && pos)
-		{
 			pin[pos--] = '\0';
-			printf("%s", "\b \b");
-		}
-	} while (c != 13);
+	} 
+	while (c != 13);
 	return pin;
 }
 
@@ -108,7 +102,7 @@ int removeUser(User *loggedUser)
 	if (!strcmp(loggedUser->username, toDeleteUser.username))
 	{
 		printf("You can not remove yourself!");
-		Sleep(3000);
+		Sleep(2000);
 		return 0;
 	}
 	int i = isUsernameExisting(toDeleteUser.username);
@@ -128,7 +122,7 @@ int removeUser(User *loggedUser)
 		return 0;
 	}
 	printf("No such user.");
-	Sleep(3000);
+	Sleep(2000);
 	return 0;
 }
 
@@ -170,7 +164,7 @@ User * readAllRegisteredUsers(int *numberOfAllUsers)
 	else
 	{
 		printf("Error while opening users.txt");
-		Sleep(3000);
+		Sleep(2000);
 		exit(-1);
 	}
 	return NULL;
@@ -256,14 +250,14 @@ User* changeUserGroup()
 			if (users[i].userGroup == Admin)
 			{
 				printf("\nUser is already admin.");
-				Sleep(3000);
+				Sleep(2000);
 				return NULL;
 			}
 			else
 			{
 				users[i].userGroup = Admin;
 				printf("\nUserGroup changed successfully");
-				Sleep(3000);
+				Sleep(2000);
 				printAllUsersInFile(users, numberOfUsers);
 				return &users[i];
 			}
@@ -273,7 +267,7 @@ User* changeUserGroup()
 			if (users[i].userGroup == Analyst)
 			{
 				printf("\nUser is already Analyst.");
-				Sleep(3000);
+				Sleep(2000);
 				return NULL;
 			}
 			else
@@ -281,14 +275,14 @@ User* changeUserGroup()
 				users[i].userGroup = Analyst;
 				printf("\nUserGroup changed successfully");
 				printAllUsersInFile(users, numberOfUsers);
-				Sleep(3000);
+				Sleep(2000);
 				return &users[i];
 			}
 		}
 		else
 		{
 			printf("Wrong UserGroup");
-			Sleep(3000);
+			Sleep(2000);
 			return NULL;
 		}
 	}
@@ -316,7 +310,7 @@ User* login()
 	else
 	{
 		printf("Wrong username or PIN!");
-		Sleep(3000);
+		Sleep(2000);
 		return NULL;
 	}
 }

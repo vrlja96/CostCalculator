@@ -9,12 +9,11 @@ User *currentUser;
 
 int main()
 {
-	Node *head = NULL, *tail = NULL;
+	/*Node *head = NULL, *tail = NULL;
 	loadBills(&head, &tail);
 	for (Node *tmp = head; tmp; tmp = tmp->next)
 		printf("%s -- %d\n", tmp->bill.date, isDateLegitimate(tmp->bill.date));
-	return 0;
-	/*
+	return 0;*/
 	int option;
 	time_t rawtime;
 	struct tm *timeinfo;
@@ -159,5 +158,5 @@ int main()
 		fprintf(analystlog, "%s Login %02d.%02d.%02d. - %02d:%02d:%02d\n", currentUser->username, timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 		fclose(analystlog);
 		main();
-	}*/
+	}
 }

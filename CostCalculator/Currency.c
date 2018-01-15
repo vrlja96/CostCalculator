@@ -7,6 +7,7 @@ Currency * readAllCurrencies(int * numOfCurrencies)
 	if (!currencyFile)
 	{
 		printf("Can not open \"currency.txt\" .");
+		Sleep(2000);
 		return NULL;
 	}
 	int numberOfCurrencies = 0, temp = 1;
@@ -14,10 +15,7 @@ Currency * readAllCurrencies(int * numOfCurrencies)
 	while (fscanf(currencyFile, "%s %lf\n", currencies[numberOfCurrencies].currency, &currencies[numberOfCurrencies].currencyRate) != EOF)
 	{
 		if (++numberOfCurrencies == temp)
-		{
 			currencies = (Currency *)realloc(currencies, sizeof(Currency) * (temp *= 2));
-
-		}
 	}
 	if (numberOfCurrencies == 0)
 	{
@@ -38,6 +36,7 @@ void addNewCurrency()
 	if (!currencyFile)
 	{
 		printf("Error. Can not open \"currency.txt\" ");
+		Sleep(2000);
 		return;
 	}
 	printf("Adding new Currency.\n Name (3 characters): ");
@@ -156,12 +155,6 @@ int changeCurrency()
 	printf("No such Currency in currency list.");
 	Sleep(2000);
 	return 0;
-}
-
-void setDefaultCurrency()
-{
-	strcpy(currentCurrency.currency, "BAM");
-	currentCurrency.currencyRate = 1.0;
 }
 
 int removeCurrency()
