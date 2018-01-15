@@ -15,7 +15,7 @@
 
 typedef struct _product
 {
-	char productCode[15], productName[50];
+	char productCode[15], productName[	50];
 	double quantity, singleProductPrice, totalProductPrice;
 }Product;
 
@@ -56,3 +56,6 @@ void clearList(Node **, Node **); //Clear list
 
 void printBillInFile(FILE *, Bill, Currency); //Prints bill in file
 void exportDataForMonth(Node *, Node *, Currency); //Export data for specified month
+
+void exportDataForProduct(Node *, Node *, Currency); //Export data for specified product
+void exportDataForBuyer(Node *, Node *, Currency); //Export data for specified buyer

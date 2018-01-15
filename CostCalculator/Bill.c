@@ -851,3 +851,83 @@ void printBillInFile(FILE *file, Bill bill, Currency currentCurrency)
 		fprintf(file, "%s %s %.3lf %.3lf %.3lf\n", bill.products[i].productName, bill.products[i].productCode, bill.products[i].singleProductPrice * currentCurrency.currencyRate, bill.products[i].quantity, bill.products[i].totalProductPrice * currentCurrency.currencyRate);
 	fprintf(file, "===END OF BILL===\n\n");
 }
+
+void exportDataForProduct(Node *head, Node *tail, Currency currentCurrency)
+{
+	if (head == NULL)
+	{
+		printf("There is no bills in system.");
+		Sleep(2000);
+		return;
+	}
+	char productName[25] = { 0 }, filename[45] = { 0 };
+	strcpy(filename, "ExportedData\\\\");
+	printf("Enter Product Name: ");
+	scanf("%s", productName);
+	strcat(filename, productName);
+	strcat(filename, ".txt");
+	FILE *file = fopen(filename, "w");
+	if (!file)
+	{
+		printf("Couldn't open file for writing data.");
+		Sleep(2000);
+		return;
+	}
+	double quantity = 0, totalPrice = 0, singlePrice = 0;
+	char productCode[25] = { 0 };
+	printf("Data is written in %s", filename);
+	for (Node *tmp = head; tmp; tmp = tmp->next)
+	{
+		for (int i = 0; i < tmp->bill.numblerOfProducts; ++i)
+		{
+			if (!strcmp(tmp->bill.products[i].productName, productName))
+			{
+				strcpy(productCode, tmp->bill.products[i].productCode);
+				quantity += tmp->bill.products[i].quantity;
+				totalPrice += tmp->bill.products[i].totalProductPrice;
+				singlePrice = tmp->bill.products[i].singleProductPrice;
+			}
+		}
+	}
+	fprintf(file, "Product Name: %s\nProduct Code: %s\nSingle Price: %.3lf %s\nTotal Quantity: %.3lf\nTotal Price: %.3lf %s\n", productName, productCode, singlePrice * currentCurrency.currencyRate, currentCurrency.currency, quantity, totalPrice * currentCurrency.currencyRate, currentCurrency.currency);
+	fclose(file);
+	Sleep(2000);
+}
+
+void exportDataForBuyer(Node *head, Node *tail, Currency currentCurrency)
+{
+	if (head == NULL)
+	{
+		printf("There is no bills in system.");
+		Sleep(2000);
+		return;
+	}
+	int numberOfBills = 0;
+	double total = 0;
+	char buyerName[25] = { 0 }, filename[35] = { 0 };
+	printf("Enter Buyer Name: ");
+	scanf("%s", buyerName);
+	strcpy(filename, "ExportedData\\\\");
+	strcat(filename, buyerName);
+	strcat(filename, ".txt");
+	FILE *file = fopen(filename, "w");
+	if (!file)
+	{
+		printf("Couldn't open file for writing data.");
+		Sleep(2000);
+		return;
+	}
+	printf("Data is written in %s", filename);
+	for (Node *tmp = head; tmp; tmp = tmp->next)
+	{
+		if (!strcmp(buyerName, tmp->bill.buyerName))
+		{
+			printBillInFile(file, tmp->bill, currentCurrency);
+			++numberOfBills;
+			total += tmp->bill.totalPrice;
+		}
+	}
+	fprintf(file, "---------------------------\nNumber of Bills: %d\nTotal Price: %.3lf %s\n---------------------------\n", numberOfBills, total * currentCurrency.currencyRate, currentCurrency.currency);
+	fclose(file);
+	Sleep(2000);
+}
