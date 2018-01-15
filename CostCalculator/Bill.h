@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <string.h>
+#include "Currency.h"
 #include "dirent.h"
 
 #define Format1 1
@@ -53,4 +54,5 @@ void archiveBill(char *); //Move bill in archive after loading
 void add(Node **, Node**, Bill); //Add bill in list
 void clearList(Node **, Node **); //Clear list
 
+void printBillInFile(FILE *, Bill, Currency); //Prints bill in file
 void exportDataForMonth(Node *, Node *, Currency); //Export data for specified month

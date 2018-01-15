@@ -844,3 +844,10 @@ void exportDataForMonth(Node *head, Node *tail, Currency currentCurrency)
 	Sleep(2000);
 }
 
+void printBillInFile(FILE *file, Bill bill, Currency currentCurrency)
+{
+	fprintf(file, "Buyer Name: %s\nDate: %s\nPrice: %.3lf %s\nPDV: %.3lf %s\nTotal Price: %.3lf %s\n\n\n", bill.buyerName, bill.date, bill.total * currentCurrency.currencyRate, currentCurrency.currency, bill.PDV * currentCurrency.currencyRate, currentCurrency.currency, bill.totalPrice * currentCurrency.currencyRate, currentCurrency.currency);
+	for (int i = 0; i < bill.numblerOfProducts; ++i)
+		fprintf(file, "%s %s %.3lf %.3lf %.3lf\n", bill.products[i].productName, bill.products[i].productCode, bill.products[i].singleProductPrice * currentCurrency.currencyRate, bill.products[i].quantity, bill.products[i].totalProductPrice * currentCurrency.currencyRate);
+	fprintf(file, "===END OF BILL===\n\n");
+}
