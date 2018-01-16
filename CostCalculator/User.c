@@ -53,7 +53,7 @@ void addNewUser()
 			}
 			else
 			{
-				printf("Enter User Group Again.");
+				printf("\nEnter User Group Again.\n");
 			}
 		}
 		if (newUser.userGroup == Admin)
@@ -87,7 +87,7 @@ char* inputPin()
 	return pin;
 }
 
-int removeUser(User *loggedUser)
+void removeUser(User *loggedUser)
 {
 	int numberOfRegisteredUsers = 0;
 	User *users = readAllRegisteredUsers(&numberOfRegisteredUsers), toDeleteUser;
@@ -101,9 +101,9 @@ int removeUser(User *loggedUser)
 	scanf("%s", toDeleteUser.username);
 	if (!strcmp(loggedUser->username, toDeleteUser.username))
 	{
-		printf("You can not remove yourself!");
+		printf("\nYou can not remove yourself!");
 		Sleep(2000);
-		return 0;
+		return;
 	}
 	int i = isUsernameExisting(toDeleteUser.username);
 	if (i >= 0 && !strcmp(users[i].name, toDeleteUser.name) && !strcmp(users[i].surname, toDeleteUser.surname))
@@ -117,13 +117,14 @@ int removeUser(User *loggedUser)
 			for (int j = i; j < numberOfRegisteredUsers - 1; ++j)
 				users[j] = users[j + 1];
 			printAllUsersInFile(users, numberOfRegisteredUsers - 1);
-			return 1;
+			printf("\nUser removed");
+			Sleep(2000);
+			return;
 		}
-		return 0;
+		return;
 	}
 	printf("No such user.");
 	Sleep(2000);
-	return 0;
 }
 
 User * readAllRegisteredUsers(int *numberOfAllUsers)
@@ -286,7 +287,12 @@ User* changeUserGroup()
 			return NULL;
 		}
 	}
-	return 0;
+	else
+	{
+		printf("No such user.");
+		Sleep(2000);
+		return NULL;
+	}
 }
 
 User* login()
@@ -303,13 +309,13 @@ User* login()
 	int position = isUsernameExisting(username);
 	if ((position >= 0) && allUsers[position].pin == pin)
 	{
-		printf("Login Successful.");
+		printf("\nLogin Successful.");
 		Sleep(2000);
 		return &allUsers[position];
 	}
 	else
 	{
-		printf("Wrong username or PIN!");
+		printf("\nWrong username or PIN!");
 		Sleep(2000);
 		return NULL;
 	}

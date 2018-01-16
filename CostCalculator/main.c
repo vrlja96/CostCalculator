@@ -7,15 +7,6 @@
 
 
 void makelog(char *, User *, FILE *);
-//int main()
-//{
-//	Currency currentCurrency = { "CHF", 0.603};
-//	Node *head = NULL, *tail = NULL;
-//	loadBills(&head, &tail);
-//	exportDataForBuyer(head, tail, currentCurrency);
-//	exportDataForMonth(head, tail, currentCurrency);
-//	exportDataForProduct(head, tail, currentCurrency);
-//}
 
 Currency currentCurrency = { "BAM", 1.00 };
 
@@ -39,7 +30,7 @@ int main()
 		timeinfo = localtime(&rawtime);
 		system("cls");
 		printf("Welcome %s", currentUser->name);
-		printf("\nLogin time: %02d.%02d.%02d. - %02d:%02d:%02d", timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+		printf("\nLogin time: %02d.%02d.%02d. - %02d:%02d:%02d\n", timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 		FILE *adminlog = fopen("adminlog.txt", "a+");
 		if (!adminlog)
 		{
@@ -50,22 +41,37 @@ int main()
 		while (1)
 		{
 			printf("Choose one of options:\n\n");
-			printf("[1] Add New User\n[2] Remosve User\n[3] Change Users Group\n[4] Print All Users\n[5] Add New Currency\n[6] Remove Currency\n[7] Change Currency\n[8] Update Currency's rate\n[9] Print All Currencies\n[10] Logout\n[0] Close Application\n");
+			printf("[1] Add New User\n[2] Remove User\n[3] Change Users Group\n[4] Print All Users\n[5] Add New Currency\n[6] Remove Currency\n[7] Change Currency\n[8] Update Currency's rate\n[9] Print All Currencies\n[10] Logout\n[0] Close Application\n");
 			scanf("%d", &option);
+			User *changedUser = NULL;
 			switch (option)
 			{
 			case 1:
+				system("cls");
 				addNewUser();
 				makelog("Add New User", currentUser, adminlog);
 				system("cls");
 				break;
 			case 2:
-				removeUser();
+				system("cls");
+				removeUser(currentUser);
 				makelog("Remove User", currentUser, adminlog);
 				system("cls");
 				break;
 			case 3:
-				changeUserGroup();
+				system("cls");
+				printAllUsers();
+				changedUser = changeUserGroup();
+				if (changedUser && !strcmp(changedUser->username, currentUser->username))
+				{
+					printf("\nYour Usergroup has been changed. Logging out.\n");
+					Sleep(2000);
+					makelog("Logout", currentUser, adminlog);
+					currentUser = NULL;
+					fclose(adminlog);
+					system("cls");
+					main();
+				}
 				makelog("Change Users Group", currentUser, adminlog);
 				system("cls");
 				break;
@@ -73,34 +79,47 @@ int main()
 				system("cls");
 				makelog("Print All Users", currentUser, adminlog);
 				printAllUsers();
+				printf("\nPress ENTER to continue");
+				getchar();
+				getchar();
+				system("cls");
 				break;
 			case 5:
+				system("cls");
 				addNewCurrency();
 				makelog("Add New Currency", currentUser, adminlog);
 				system("cls");
 				break;
 			case 6:
+				system("cls");
 				removeCurrency();
 				makelog("Remove Currency", currentUser, adminlog);
 				system("cls");
 				break;
 			case 7:
+				system("cls");
 				changeCurrency();
 				makelog("Change Currency", currentUser, adminlog);
 				system("cls");
 				printf("\n%s %lf\n", currentCurrency.currency, currentCurrency.currencyRate);
 				break;
 			case 8:
+				system("cls");
+				printAllCurrencies();
 				updateCurrencyRate(NULL);
 				makelog("Update Currency Rate", currentUser, adminlog);
 				system("cls");
 				break;
 			case 9:
-				system("cls");
 				makelog("Print All Currencies", currentUser, adminlog);
 				printAllCurrencies();
+				printf("\nPress ENTER to continue");
+				getchar();
+				getchar();
+				system("cls");
 				break;
 			case 10:
+				system("cls");
 				system("cls");
 				makelog("Logout", currentUser, adminlog);
 				fclose(adminlog);
@@ -108,7 +127,7 @@ int main()
 				break;
 			default: case 0:
 				fclose(adminlog);
-				return 0;
+				exit(0);
 			}
 		}
 	}
@@ -136,21 +155,26 @@ int main()
 			switch (option)
 			{
 			case 1:
+				system("cls");
 				exportDataForProduct(head, tail, currentCurrency);
 				makelog("Export Data For Product", currentUser, analystlog);
 				system("cls");
 				break;
 			case 2:
+				system("cls");
 				exportDataForMonth(head, tail, currentCurrency);
 				makelog("Export Data For Month", currentUser, analystlog);
 				system("cls");
 				break;
 			case 3:
+				system("cls");
 				exportDataForBuyer(head, tail, currentCurrency);
 				makelog("Export Data For Buyer", currentUser, analystlog);
 				system("cls");
 				break;
 			case 4:
+				system("cls");
+				printAllCurrencies();
 				changeCurrency();
 				makelog("Change Currency", currentUser, analystlog);
 				system("cls");
@@ -165,7 +189,7 @@ int main()
 			default:case 0:
 				fclose(analystlog);
 				clearList(&head, &tail);
-				return 0;
+				exit(0);
 			}
 		}
 	}

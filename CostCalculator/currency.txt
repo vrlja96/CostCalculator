@@ -1,4 +1,6 @@
-BAM  1.00
+BAM  1.00 
 EUR  0.50 
 CHF  0.60 
 HRK  3.80 
+FFF  6.50 
+DIN  12.00

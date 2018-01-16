@@ -39,7 +39,7 @@ void addNewCurrency()
 		Sleep(2000);
 		return;
 	}
-	printf("Adding new Currency.\n Name (3 characters): ");
+	printf("Adding new Currency.\nName (3 characters): ");
 	scanf("%s", newCurrency.currency);
 	for (int i = 0; i < numberOfCurrencies; ++i)
 	{
@@ -91,7 +91,7 @@ void updateCurrencyRate(Currency *currency)
 	{
 		if (!strcmp(toUpdateCurrency.currency, currencies[i].currency))
 		{
-			printf("Enter new Rate for %s", currencies[i].currency);
+			printf("Enter new Rate for %s: ", currencies[i].currency);
 			scanf("%lf", &toUpdateCurrency.currencyRate);
 			if (toUpdateCurrency.currencyRate == currencies[i].currencyRate)
 			{

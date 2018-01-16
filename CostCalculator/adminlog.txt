@@ -23,3 +23,20 @@ vrlja Print All Currencies 28.12.2017. - 12:19:22
 vrlja Add New Currency 28.12.2017. - 12:19:35
 vrlja Print All Currencies 28.12.2017. - 12:19:36
 vrlja Logout 28.12.2017. - 12:19:45
+djukz Login 16.01.2018. - 22:14:08
+djukz Logout 16.01.2018. - 22:14:23
+vrlja Login 16.01.2018. - 22:27:19
+vrlja Change Users Group 16.01.2018. - 22:27:30
+vrlja Logout 16.01.2018. - 22:27:33
+bokz Login 16.01.2018. - 22:27:40
+bokz Logout 16.01.2018. - 22:28:09
+vrlja Login 16.01.2018. - 22:36:49
+vrlja Change Users Group 16.01.2018. - 22:37:00
+vrlja Print All Users 16.01.2018. - 22:37:04
+vrlja Add New Currency 16.01.2018. - 22:37:25
+vrlja Print All Currencies 16.01.2018. - 22:37:28
+vrlja Change Currency 16.01.2018. - 22:37:37
+vrlja Update Currency Rate 16.01.2018. - 22:37:55
+vrlja Print All Currencies 16.01.2018. - 22:37:56
+vrlja Login 16.01.2018. - 22:53:00
+vrlja Update Currency Rate 16.01.2018. - 22:53:11
