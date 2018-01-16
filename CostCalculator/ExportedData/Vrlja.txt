@@ -1,0 +1,15 @@
+Buyer Name: Vrlja
+Date: 24/10/2017
+Price: 250.000 BAM
+PDV: 42.500 BAM
+Total Price: 292.500 BAM
+
+
+abc 123 5.000 10.000 50.000
+abb 456 10.000 20.000 200.000
+===END OF BILL===
+
+---------------------------
+Number of Bills: 1
+Total Price: 292.500 BAM
+---------------------------

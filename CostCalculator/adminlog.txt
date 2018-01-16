@@ -40,3 +40,5 @@ vrlja Update Currency Rate 16.01.2018. - 22:37:55
 vrlja Print All Currencies 16.01.2018. - 22:37:56
 vrlja Login 16.01.2018. - 22:53:00
 vrlja Update Currency Rate 16.01.2018. - 22:53:11
+vrlja Login 16.01.2018. - 23:09:34
+vrlja Logout 16.01.2018. - 23:09:34

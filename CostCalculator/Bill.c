@@ -807,7 +807,6 @@ void exportDataForMonth(Node *head, Node *tail, Currency currentCurrency)
 		printf("Enter month and year in format mm.yyyy: ");
 		scanf("%s", month);
 	} while (strlen(month) < 5);
-	printf("%s", month);
 	int numberOfBills = 0;
 	double total = 0;
 	char filename[128] = { 0 };
