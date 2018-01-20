@@ -1,5 +1,0 @@
-Product Name: abb
-Product Code: 456
-Single Price: 10.000 BAM
-Total Quantity: 120.000
-Total Price: 1200.000 BAM

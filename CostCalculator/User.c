@@ -105,6 +105,12 @@ void removeUser(User *loggedUser)
 		Sleep(2000);
 		return;
 	}
+	if(!strcmp(toDeleteUser.username, "root"))
+	{
+		printf("\nYou can not remove root-user.\n");
+		Sleep(2000);
+		return;
+	}
 	int i = isUsernameExisting(toDeleteUser.username);
 	if (i >= 0 && !strcmp(users[i].name, toDeleteUser.name) && !strcmp(users[i].surname, toDeleteUser.surname))
 	{
@@ -230,6 +236,7 @@ void printAllUsers()
 	}
 	printf("=========================================================================================\n");
 }
+
 User* changeUserGroup()
 {
 	int numberOfUsers;
@@ -241,6 +248,12 @@ User* changeUserGroup()
 	scanf("%s", surname);
 	printf("Enter Users Username: ");
 	scanf("%s", username);
+	if(!strcmp(username, "root"))
+	{
+		printf("You can not change group for root-user.\n");
+		Sleep(2000);
+		return NULL;
+	}
 	int i = isUsernameExisting(username);
 	if (i >= 0 && !strcmp(users[i].name, name) && !strcmp(users[i].surname, surname))
 	{

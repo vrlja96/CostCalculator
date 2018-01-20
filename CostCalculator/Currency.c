@@ -63,6 +63,8 @@ void addNewCurrency()
 	}
 	printf("Currency Rate: ");
 	scanf("%lf", &newCurrency.currencyRate);
+	printf("Currency added.\n");
+	Sleep(2000);
 	fprintf(currencyFile, "%-4s %-5.2lf\n", newCurrency.currency, newCurrency.currencyRate);
 	fclose(currencyFile);
 }
@@ -149,6 +151,8 @@ int changeCurrency()
 		{
 			strcpy(currentCurrency.currency, currency);
 			currentCurrency.currencyRate = currencies[i].currencyRate;
+			printf("Currency changed.\n");
+			Sleep(2000);
 			return 1;
 		}
 	}

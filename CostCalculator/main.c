@@ -13,6 +13,7 @@ Currency currentCurrency = { "BAM", 1.00 };
 int main()
 {
 	User *currentUser = NULL;
+	static int numberOfLoginAttempts = 0;
 	int option;
 	time_t rawtime;
 	struct tm *timeinfo;
@@ -21,6 +22,13 @@ int main()
 	timeinfo = localtime(&rawtime);
 	if (currentUser == NULL)
 	{
+		++numberOfLoginAttempts;
+		if (numberOfLoginAttempts == 3)
+		{
+			printf("\nError. You exceeded number of login attempts.\n");
+			Sleep(2000);
+			exit(0);
+		}
 		printf("\nTry again!\n");
 		main();
 	}
@@ -40,6 +48,7 @@ int main()
 		makelog("Login", currentUser, adminlog);
 		while (1)
 		{
+			printf("Current Currency: %s\n\n", currentCurrency.currency);
 			printf("Choose one of options:\n\n");
 			printf("[1] Add New User\n[2] Remove User\n[3] Change Users Group\n[4] Print All Users\n[5] Add New Currency\n[6] Remove Currency\n[7] Change Currency\n[8] Update Currency's rate\n[9] Print All Currencies\n[10] Logout\n[0] Close Application\n");
 			scanf("%d", &option);
@@ -100,8 +109,8 @@ int main()
 				system("cls");
 				changeCurrency();
 				makelog("Change Currency", currentUser, adminlog);
+				Sleep(2000);
 				system("cls");
-				printf("\n%s %lf\n", currentCurrency.currency, currentCurrency.currencyRate);
 				break;
 			case 8:
 				system("cls");
@@ -149,6 +158,7 @@ int main()
 		loadBills(&head, &tail);
 		while (1)
 		{
+			printf("Current Currency: %s\n\n", currentCurrency.currency);
 			printf("Choose one of options:\n\n");
 			printf("[1] Export Data For Product\n[2] Export Data For Month\n[3] Export Data for Buyer\n[4] Change Currency\n[5] Logout\n[0] Close Application\n");
 			scanf("%d", &option);
@@ -174,11 +184,9 @@ int main()
 				break;
 			case 4:
 				system("cls");
-				printAllCurrencies();
 				changeCurrency();
 				makelog("Change Currency", currentUser, analystlog);
 				system("cls");
-				printf("\n%s %lf\n", currentCurrency.currency, currentCurrency.currencyRate);
 				break;
 			case 5:
 				system("cls");
