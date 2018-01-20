@@ -182,10 +182,13 @@ int removeCurrency()
 				currencies[j] = currencies[j + 1];
 			}
 			printCurrenciesInFile(currencies, numberOfCurrencies - 1);
+			printf("Currency removed.");
+			Sleep(2000);
 			return 1;
 		}
 	}
 	printf("No such currency in file.");
+	Sleep(2000);
 	return 0;
 }
 

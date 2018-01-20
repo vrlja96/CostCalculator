@@ -120,6 +120,7 @@ int main()
 				system("cls");
 				break;
 			case 9:
+				system("cls");
 				makelog("Print All Currencies", currentUser, adminlog);
 				printAllCurrencies();
 				printf("\nPress ENTER to continue");
